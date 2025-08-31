@@ -24,7 +24,7 @@ async def health_check():
 async def get_pincode_details(pincode: int):
     async with app.state.db_pool.acquire() as connection:
         result = await connection.fetchrow(
-            "SELECT * FROM public.pincode WHERE pincode = $1", pincode
+            f"SELECT * FROM public.pincode WHERE pincode = '{pincode}'"
         )
         if result:
             return dict(result)
